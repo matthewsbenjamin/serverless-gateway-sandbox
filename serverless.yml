@@ -1,0 +1,28 @@
+service: gateway-test
+
+provider:
+  name: aws
+  endpointType: regional
+  runtime: nodejs14.x
+  region: eu-west-2
+  iamRoleStatements:
+    - Effect: Allow
+      Action: 'ec2:*'
+      Resource: "*"
+  apiGateway:
+    apiKeySourceType: HEADER
+    minimumCompressionSize: 1024
+    description: This is the description, idk where it goes
+
+functions:
+  hello:
+    handler: src/hello
+    events:
+      - http:
+          path: /hello/{id}
+          method: get
+          integration: lambda-proxy
+          request:
+            parameters:
+              paths:
+                id: true
