@@ -16,10 +16,31 @@ provider:
     description: This is the description, idk where it goes
 
 functions:
-  hello:
+  action:
     handler: app.handler
     events:
       - http:
-          path: /{proxy+}
+          path: /action/{proxy+}
+          method: any
+          integration: lambda-proxy
+  authenticate:
+    handler: app.handler
+    events:
+      - http:
+          path: /authenticate/{proxy+}
+          method: any
+          integration: lambda-proxy
+  register:
+    handler: app.handler
+    events:
+      - http:
+          path: /register/{proxy+}
+          method: any
+          integration: lambda-proxy
+  api:
+    handler: app.handler
+    events:
+      - http:
+          path: /v1/{proxy+}
           method: any
           integration: lambda-proxy
