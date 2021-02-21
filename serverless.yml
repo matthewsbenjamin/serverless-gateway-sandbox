@@ -16,31 +16,28 @@ provider:
     description: This is the description, idk where it goes
 
 functions:
-  action:
-    handler: app.handler
-    events:
-      - http:
-          path: /action/{proxy+}
-          method: any
-          integration: lambda-proxy
-  authenticate:
-    handler: app.handler
-    events:
-      - http:
-          path: /authenticate/{proxy+}
-          method: any
-          integration: lambda-proxy
-  register:
-    handler: app.handler
-    events:
-      - http:
-          path: /register/{proxy+}
-          method: any
-          integration: lambda-proxy
-  api:
+  app:
     handler: app.handler
     events:
       - http:
           path: /v1/{proxy+}
           method: any
           integration: lambda-proxy
+          authorizer:
+            arn: arn:aws:cognito-idp:eu-west-2:493235065205:userpool/eu-west-2_8yI8I0Raa
+  authenticate:
+    handler: app.authHandler
+    events:
+      - http:
+          path: /authenticate
+          method: any
+          integration: lambda-proxy
+  register:
+    handler: app.registrationHandler
+    events:
+      - http:
+          path: /register
+          method: any
+          integration: lambda-proxy
+
+    
