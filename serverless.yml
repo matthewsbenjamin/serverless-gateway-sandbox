@@ -2,7 +2,8 @@ service: gateway-test
 
 provider:
   name: aws
-  endpointType: regional
+  endpointType: edge
+  stage: ${opt:stage, 'dev'}
   runtime: nodejs14.x
   region: eu-west-2
   iamRoleStatements:
