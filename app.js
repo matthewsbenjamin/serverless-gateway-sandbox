@@ -27,7 +27,22 @@ var express = __importStar(require("express"));
 var aws_serverless_express_1 = __importDefault(require("aws-serverless-express"));
 exports.app = express.default();
 exports.app.use(express.json());
-exports.app.use('/', function (req, res) {
+exports.app.use('/action', function (req, res) {
+    console.log(req);
+    res.status(200);
+    res.send('Hello from the action API');
+});
+exports.app.use('/authenticate', function (req, res) {
+    console.log(req);
+    res.status(200);
+    res.send('Hello from the authentication API');
+});
+exports.app.use('/register', function (req, res) {
+    console.log(req);
+    res.status(200);
+    res.send('Hello from the registration API');
+});
+exports.app.use('/v1', function (req, res) {
     console.log(req);
     res.status(200);
     res.send('Hello from the API');
