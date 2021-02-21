@@ -16,13 +16,9 @@ provider:
 
 functions:
   hello:
-    handler: src/hello
+    handler: app.handler
     events:
       - http:
-          path: /hello/{id}
-          method: get
+          path: /{proxy+}
+          method: any
           integration: lambda-proxy
-          request:
-            parameters:
-              paths:
-                id: true
